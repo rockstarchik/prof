@@ -13,18 +13,18 @@ for id, name, title, clas, score in answer:
     if score == 'None':
         mn.add(clas)
 sp = list(mn)
-summ = [0] * 5
-kol = [0] * 5
+summ = [0] * len(sp)
+kol = [0] * len(sp)
 
 for id, name, title, clas, score in answer:
     if score != 'None' and clas in sp:
         i = sp.index(clas)
-        summ[i] = summ[i] + int(score)
-        kol[i] = kol[i] + int(score)
+        summ[i] +=  int(score)
+        kol[i] += 1
 with open("studeb_new2.csv","w",newline="") as file2:
     writer = csv.writer(file2)
     for id, name, title, clas, score in answer:
         if score == "None":
             i = sp.index(clas)
-            score = str(round(summ[i])/kol[i], 2)
+            score = str(round(summ[i]/kol[i], 2))
         writer.writerow([id, name, title, clas, score])
